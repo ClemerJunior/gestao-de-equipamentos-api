@@ -1,0 +1,23 @@
+nomeaplicativo:
+  microservice:
+    swagger:
+      version: @project.version@
+      title: @project.name@
+      description: @project.description@
+---
+spring:
+  profiles: local
+  application:
+    name: nomeaplicativo-api
+---
+spring:
+  main:
+    banner-mode: 'off'
+    allow-bean-definition-overriding: true
+  application:
+    name: ${APP_NAME}
+---
+management:
+  health:
+    rabbit:
+      enabled: false

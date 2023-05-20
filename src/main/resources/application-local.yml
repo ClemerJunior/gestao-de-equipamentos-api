@@ -1,0 +1,82 @@
+nomeaplicativo-api:
+  maiorIdade: 18
+  validadeTokenAtivacao: 30
+  cors:
+    allowedOrigins: '*'
+    allowedMethods: '*'
+  jwt:
+    secret: 15c64fb177c1aa2b88e83bff9ea659a7e49a7cd1ae4c3a39b2fe14ecd7529c48e75c3baa57aa9373df03aff4e222ee3a22a0cc09110021b694b88b1c94d8c168
+    expirationInMillis: 604800000
+
+---
+server:
+  port: 8080
+---
+spring:
+  application:
+    name: nomeaplicativo
+  datasource:
+    url: jdbc:postgresql://ultimoteste.cr606llx6pvj.us-east-2.rds.amazonaws.com:5432/postgres
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: postgres321
+    hikari:
+      read-only: false
+  flyway:
+    enabled: false
+    out-of-order: true
+    baseline-on-migrate: true
+    clean-on-validation-error: true
+    url: jdbc:postgresql://ultimoteste.cr606llx6pvj.us-east-2.rds.amazonaws.com:5432/postgres
+    user: postgres
+    password: postgres321
+    table: FLYWAY_SCHEMA_HISTORY
+#    placeholders:
+#      SCHEMA_NAME: NOMEAPLICATIVO
+#      TABLESPACE_DATA: NOMEAPLICATIVO_DATA
+#      TABLESPACE_INDEX: NOMEAPLICATIVO_INDEX
+    locations: classpath:/db/migration
+    schemas: NOMEAPLICATIVO
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        default_schema: NOMEAPLICATIVO
+        type: trace
+        temp:
+          use_jdbc_metadata_defaults: false
+  messages:
+    basename: i18n.messages
+    encoding: UTF-8
+    cache-duration: 40
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: clemersojr@gmail.com
+    password: tsabotavoc123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          starttls.enable: true
+          starttls.required: true
+          ssl.enable: false
+          ssl.trust: smtp.gmail.com
+        test-connection: true
+---
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+---
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
